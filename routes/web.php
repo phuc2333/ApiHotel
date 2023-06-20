@@ -37,29 +37,29 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     });
 
     // groups
-    Route::prefix('groups')->name('groups.')->group(function () {
-        Route::get('/', [GroupsController::class, 'index'])->name('index');
+    Route::prefix('groups')->name('groups.')->middleware('checkPermission')->group(function () {
+        Route::get('/', [GroupsController::class, 'index'])->name('view');
         Route::get('/add', [GroupsController::class, 'viewadd'])->name('add');
-        Route::post('/add', [GroupsController::class, 'Groupadd'])->name('GroupAdd');
-        
+        Route::post('/add', [GroupsController::class, 'Groupadd'])->name('addGroup');
+
         Route::get('/edit/{id}', [GroupsController::class, 'edit'])->name('edit');
-        Route::post('/edit/{id}', [GroupsController::class, 'Groupedit']);
+        Route::post('/edit/{id}', [GroupsController::class, 'editGroup']);
 
         Route::get('/delete/{id}', [GroupsController::class, 'delete'])->name('delete');
 
-        Route::get('/permission/{id}', [GroupsController::class, 'permission'])->name('permission');
+        Route::get('/permission/{id}', [GroupsController::class, 'permission'])->middleware('checkActionPermissionGroup')->name('permission');
         Route::post('/permissionPost', [GroupsController::class, 'postPermission'])->name('Postpermission');
     });
-   
-    // users
-    Route::prefix('users')->name('users.')->middleware('checkPermission:users')->group(function () {
-        Route::get('/', [UsersController::class, 'index'])->name('index');
-        Route::get('/add', [UsersController::class, 'viewadd'])->name('add');
-        Route::post('/add', [UsersController::class, 'Useradd'])->name('postAdd');
-        
-        Route::get('/edit/{id}', [UsersController::class, 'edit'])->name('edit');
-        Route::post('/edit/{id}', [UsersController::class, 'Useredit']);
 
-        Route::get('/delete/{id}', [UsersController::class, 'delete'])->name('delete');
+    // users
+    Route::prefix('users')->name('users.')->middleware('checkPermission')->group(function () {
+        Route::get('/', [UsersController::class, 'index'])->middleware('checkPermissionCRUD')->name('view');
+        Route::get('/add', [UsersController::class, 'viewadd'])->middleware('checkPermissionCRUD')->name('add');
+        Route::post('/add', [UsersController::class, 'Useradd'])->middleware('checkPermissionCRUD')->name('addUser');
+
+        Route::get('/edit/{id}', [UsersController::class, 'edit'])->middleware('checkPermissionCRUD')->name('edit');
+        Route::post('/edit/{id}', [UsersController::class, 'Useredit'])->middleware('checkPermissionCRUD')->name('editUser');
+
+        Route::get('/delete/{id}', [UsersController::class, 'delete'])->middleware('checkPermissionCRUD')->name('delete');
     });
 });

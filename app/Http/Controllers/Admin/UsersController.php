@@ -11,9 +11,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
-    public function index($module)
+    public function index()
     {
- 
         $dataUser = User::all();
         return view('admin.users.lists', compact('dataUser'));
     }

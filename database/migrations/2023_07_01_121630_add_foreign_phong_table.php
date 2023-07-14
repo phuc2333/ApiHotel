@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('donvi', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('TenDonVi');
-            $table->string('Dienthoai');
-            $table->string('fax');
-            $table->string('diachi');
-            $table->string('email');
-            $table->timestamps();
+        Schema::table('phong', function (Blueprint $table) {
+            $table->foreign('idTang')->references('id')->on('tang')->onDelete('cascade')->onUpdate('cascade'); 
+            $table->foreign('idLoaiPhong')->references('id')->on('loaiphong')->onDelete('cascade')->onUpdate('cascade'); 
         });
     }
 
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('donvi');
+        //
     }
 };

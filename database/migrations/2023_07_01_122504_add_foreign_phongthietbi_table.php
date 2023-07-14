@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('modules', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('title');
-            $table->timestamps();
+        Schema::table('phongthietbi', function (Blueprint $table) {
+            $table->foreign('id_Phong')->references('id')->on('phong')->onDelete('cascade')->onUpdate('cascade'); 
+            $table->foreign('id_TB')->references('id')->on('thietbi')->onDelete('cascade')->onUpdate('cascade'); 
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modules');
+        //
     }
 };

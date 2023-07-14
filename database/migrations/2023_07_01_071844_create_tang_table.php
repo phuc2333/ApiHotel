@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tang', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('TenTang');
             $table->timestamps();
         });
     }

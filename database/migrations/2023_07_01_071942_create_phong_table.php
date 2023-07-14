@@ -14,8 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('phong', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->increments('id');
+            $table->string('TenPhong');
+            $table->string('TrangThai');
+            $table->integer('idTang')->unsigned();
+            $table->integer('idLoaiPhong')->unsigned();
+            $table->timestamps();   
         });
     }
 

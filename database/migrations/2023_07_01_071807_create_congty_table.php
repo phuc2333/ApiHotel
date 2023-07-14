@@ -14,7 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('congty', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('tenCty');
+            $table->string('dienthoai');
+            $table->string('fax');
+            $table->string('diachi');
+            $table->string('email');
             $table->timestamps();
         });
     }

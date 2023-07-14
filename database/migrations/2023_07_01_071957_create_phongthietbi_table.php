@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('phongthietbi', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->integer('id_Phong')->unsigned();
+            $table->integer('id_TB')->unsigned();
+            $table->string('SoLuong');
             $table->timestamps();
         });
     }

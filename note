@@ -1,2 +1,4 @@
 Nếu cài đặt laravel passport lỗi thì dùng lệnh này cài đặt
 - composer require laravel/passport --with-all-dependencies 
+
+test
